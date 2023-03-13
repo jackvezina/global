@@ -1,7 +1,7 @@
 input.onButtonPressed(Button.A, function () {
     Skip = 1
     basic.clearScreen()
-    Mode = (Mode + 1) % 5
+    Mode = (Mode + 1) % 6
     if (Mode == 1) {
         basic.showLeds(`
             . # # # .
@@ -28,11 +28,19 @@ input.onButtonPressed(Button.A, function () {
             `)
     } else if (Mode == 4) {
         basic.showLeds(`
-            # . # . #
             . . # . .
+            . . # . .
+            # # . # #
+            . . # . .
+            . . # . .
+            `)
+    } else if (Mode == 5) {
+        basic.showLeds(`
+            . # # # .
             # # # # #
-            . . # . .
-            # . # . #
+            # # . # #
+            # # . # #
+            . # . # .
             `)
     } else {
         basic.showIcon(IconNames.Sword)
@@ -93,6 +101,11 @@ basic.forever(function () {
             } else {
                 basic.showArrow(ArrowNames.North)
             }
+        } else if (Mode == 5) {
+            led.plotBarGraph(
+            input.magneticForce(Dimension.X),
+            256
+            )
         } else {
             Temp = "" + input.temperature() + "C"
             basic.showString(Temp)
